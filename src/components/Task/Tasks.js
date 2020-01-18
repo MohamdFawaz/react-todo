@@ -4,6 +4,7 @@ import TaskFilter from "../TaskFilter/TaskFilter";
 
 import { Container } from "semantic-ui-react";
 import AddTask from "../AddTask/AddTask";
+import OverdueNotification from "../OverdueNotification/OverdueNotification";
 
 class Tasks extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class Tasks extends React.Component {
 
         this.state = {
             tasks: [],
+            uncompletedTasks: [],
             status: ''
         }
     }
@@ -20,7 +22,7 @@ class Tasks extends React.Component {
         fetch(' http://localhost:8000/api/task/not-compeleted')
             .then(res => res.json())
             .then((data) => {
-                this.setState({tasks: data.data})
+                this.setState({tasks: data.data, uncompletedTasks: data.data})
             }).catch(console.log)
     };
 
@@ -53,6 +55,7 @@ class Tasks extends React.Component {
     render() {
         return (
             <Container>
+                <OverdueNotification tasks={this.state.uncompletedTasks}/>
                 <TaskFilter onFilterChange={this.getFilter}/>
                 <AddTask onNewTask={this.getNewTask}/>
                 <TaskList tasks={this.state.tasks}/>
