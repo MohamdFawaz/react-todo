@@ -24,7 +24,6 @@ class AddTask extends React.Component {
             },
             }).then(res => res.json())
                 .then((data) => {
-                // console.log(data.data);
                 this.props.onNewTask(data.data);
             }).catch(console.log)
     };
@@ -32,7 +31,7 @@ class AddTask extends React.Component {
     handleSubmit = () => {
         const { name, dueDate } = this.state;
         this.addNewTask(name,dueDate);
-        this.setState({ name: name, dueDate: dueDate })
+        this.setState({ name: "", dueDate: "" })
     };
 
     render() {
