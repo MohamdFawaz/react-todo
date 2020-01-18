@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
 import Tasks from "./components/Task/Tasks";
+import { Container } from "semantic-ui-react";
+
 function App() {
   return (
-    <div className="App">
-      <Tasks/>
-    </div>
+      <Container>
+            <Tasks/>
+      </Container>
   );
 }
 

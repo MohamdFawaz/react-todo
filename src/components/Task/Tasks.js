@@ -10,7 +10,7 @@ class Tasks extends React.Component {
     }
 
     componentDidMount() {
-        fetch(' http://localhost:8000/api/task')
+        fetch(' http://localhost:8000/api/task/not-compeleted')
             .then(res => res.json())
             .then((data) => {
                 this.setState({tasks: data.data})

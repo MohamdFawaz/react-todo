@@ -1,5 +1,6 @@
 import React from 'react'
-import { List, Segment } from 'semantic-ui-react'
+import { List, Segment, Grid } from 'semantic-ui-react'
+import CompletedCheck from "../CheckCompleted/CheckCompleted";
 // const TODOList = () => (
 //     <Segment inverted>
 //         <div className="ui two item menu">
@@ -42,10 +43,22 @@ class TaskList extends React.Component {
                     {this.props.tasks.map((task) => (
                     <List.Item key={task.id}>
                         <List.Content>
-                            <List.Header>{task.name}</List.Header>
-                            <List.Description>{task.due_date}</List.Description>
+                            <Grid columns='three' divided>
+                                <Grid.Row centered>
+                                    <Grid.Column width="2">
+                                        <CompletedCheck taskID={task.id} completed={task.is_completed}/>
+                                    </Grid.Column>
+                                    <Grid.Column width="10">
+                                        <List.Header>{task.name}</List.Header>
+                                    </Grid.Column>
+                                    <Grid.Column width="3">
+                                        <List.Description>{task.due_date}</List.Description>
+                                    </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
                         </List.Content>
                     </List.Item>
+
                     ))}
                 </List>
             </Segment>

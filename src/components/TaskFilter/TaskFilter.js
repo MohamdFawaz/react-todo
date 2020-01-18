@@ -1,26 +1,29 @@
 import React from "react";
-import { Button, Step } from "semantic-ui-react";
+import { Step } from "semantic-ui-react";
 class TaskFilter extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             status: ['TO DO','Completed'],
-            active: ''
         }
     }
 
+
+    filterTasks() {
+        //
+    }
 
     render() {
         return (
             <Step.Group>
                 <Step
                     icon='list'
-                    onClick={this.filter}
+                    onClick={this.filterTasks}
                     title='TO DO'
                 />
                 <Step
                     icon='check'
-                    onClick={this.filter}
+                    onClick={this.filterTasks}
                     title='Completed'
                 />
             </Step.Group>
