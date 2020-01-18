@@ -1,28 +1,53 @@
 import React from "react";
 import TaskList from "../TaskList/TaskList";
 import TaskFilter from "../TaskFilter/TaskFilter";
+import {Container} from "semantic-ui-react";
+
 class Tasks extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            tasks: []
+            tasks: [],
+            status: ''
         }
     }
 
-    componentDidMount() {
+
+    fetchNotCompletedTasks = () => {
         fetch(' http://localhost:8000/api/task/not-compeleted')
             .then(res => res.json())
             .then((data) => {
                 this.setState({tasks: data.data})
             }).catch(console.log)
+    };
+
+    fetchCompletedTasks = () => {
+        fetch(' http://localhost:8000/api/task/completed')
+            .then(res => res.json())
+            .then((data) => {
+                this.setState({tasks: data.data})
+            }).catch(console.log)
+    };
+
+    getFilter = (status) => {
+        if (status){
+            this.fetchCompletedTasks();
+        }else{
+            this.fetchNotCompletedTasks();
+        }
+    };
+
+    componentDidMount() {
+       this.fetchNotCompletedTasks();
     }
 
     render() {
         return (
-            <div>
-                <TaskFilter/>
+            <Container>
+                <TaskFilter onFilterChange={this.getFilter}/>
                 <TaskList tasks={this.state.tasks}/>
-            </div>
+            </Container>
         );
     }
 }
