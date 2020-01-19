@@ -1,7 +1,9 @@
 import React from "react";
 import TaskList from "../TaskList/TaskList";
 import TaskFilter from "../TaskFilter/TaskFilter";
-import {Container} from "semantic-ui-react";
+
+import { Container } from "semantic-ui-react";
+import AddTask from "../AddTask/AddTask";
 
 class Tasks extends React.Component {
     constructor(props) {
@@ -38,6 +40,12 @@ class Tasks extends React.Component {
         }
     };
 
+    getNewTask = (newTask) => {
+        this.setState(prevState => ({
+            tasks: [newTask, ...prevState.tasks]
+        }))
+    };
+
     componentDidMount() {
        this.fetchNotCompletedTasks();
     }
@@ -46,6 +54,7 @@ class Tasks extends React.Component {
         return (
             <Container>
                 <TaskFilter onFilterChange={this.getFilter}/>
+                <AddTask onNewTask={this.getNewTask}/>
                 <TaskList tasks={this.state.tasks}/>
             </Container>
         );
