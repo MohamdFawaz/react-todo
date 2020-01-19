@@ -29,7 +29,6 @@ class OverdueNotification extends React.Component {
 
     render() {
         let numberOfTasks = JSON.stringify(this.getOverDueTasks(this.props.tasks));
-        console.log(numberOfTasks.toString());
         const message =  `You Have Overdue Tasks ${ numberOfTasks }`;
         if (numberOfTasks > 0){
             return (
