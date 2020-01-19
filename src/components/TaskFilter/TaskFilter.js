@@ -4,14 +4,14 @@ class TaskFilter extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            status: ['TO DO','Completed'],
+
         }
     }
 
 
-    filterTasks() {
-        //
-    }
+    filterTasks = (e) =>  {
+        this.props.onFilterChange(e.currentTarget.classList.contains('completed'));
+    };
 
     render() {
         return (
@@ -25,6 +25,7 @@ class TaskFilter extends React.Component{
                     icon='check'
                     onClick={this.filterTasks}
                     title='Completed'
+                    completed
                 />
             </Step.Group>
         );

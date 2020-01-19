@@ -17,9 +17,7 @@ class CompletedCheck extends React.Component {
         })
             .then(res => res.json())
             .then((data) => {
-                if (data.data.is_completed){
-                    parentNode.className += ' hidden';
-                }
+                parentNode.className += ' hidden';
             }).catch(console.log)
     };
 
