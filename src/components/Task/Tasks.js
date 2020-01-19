@@ -5,6 +5,7 @@ import TaskFilter from "../TaskFilter/TaskFilter";
 import { Container } from "semantic-ui-react";
 import AddTask from "../AddTask/AddTask";
 import OverdueNotification from "../OverdueNotification/OverdueNotification";
+import EditTask from "../EditTask/EditTask";
 
 class Tasks extends React.Component {
     constructor(props) {
@@ -13,7 +14,10 @@ class Tasks extends React.Component {
         this.state = {
             tasks: [],
             uncompletedTasks: [],
-            status: ''
+            status: "",
+            taskID: 0,
+            editName: "",
+            editDueDate: ""
         }
     }
 
@@ -48,6 +52,11 @@ class Tasks extends React.Component {
         }))
     };
 
+
+    editTask = (task) => {
+        return this.setState({taskID: task.id, editName: task.name,editDueDate: task.due_date,showForm: true});
+    };
+
     componentDidMount() {
        this.fetchNotCompletedTasks();
     }
@@ -57,8 +66,9 @@ class Tasks extends React.Component {
             <Container>
                 <OverdueNotification tasks={this.state.uncompletedTasks}/>
                 <TaskFilter onFilterChange={this.getFilter}/>
-                <AddTask onNewTask={this.getNewTask}/>
-                <TaskList tasks={this.state.tasks}/>
+                <AddTask onNewTask={this.getNewTask} className="hidden"/>
+                <EditTask name={this.state.editName} due_date={this.state.editDueDate} id={this.state.taskID} showForm={this.state.showForm}/>
+                <TaskList tasks={this.state.tasks} onEditTask={this.editTask}/>
             </Container>
         );
     }
